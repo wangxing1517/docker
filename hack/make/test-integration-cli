@@ -2,6 +2,7 @@
 set -e
 
 bundle_test_integration_cli() {
+    docker load < ./integration-cli/hello-world.tar
 	go_test_dir ./integration-cli
 }
 

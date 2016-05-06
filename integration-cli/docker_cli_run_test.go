@@ -1439,7 +1439,7 @@ func (s *DockerSuite) TestRunNonRootUserResolvName(c *check.C) {
 	testRequires(c, SameHostDaemon)
 	testRequires(c, Network)
 
-	cmd := exec.Command(dockerBinary, "run", "--name=testperm", "--user=default", "busybox", "ping", "-c", "1", "www.docker.io")
+	cmd := exec.Command(dockerBinary, "run", "--name=testperm", "--user=default", "busybox", "ping", "-c", "1", "www.baidu.com")
 	if out, err := runCommand(cmd); err != nil {
 		c.Fatal(err, out)
 	}
@@ -2911,7 +2911,7 @@ func (s *DockerSuite) TestRunOOMExitCode(c *check.C) {
 	errChan := make(chan error)
 	go func() {
 		defer close(errChan)
-		runCmd := exec.Command(dockerBinary, "run", "-m", "4MB", "busybox", "sh", "-c", "x=a; while true; do x=$x$x$x$x; done")
+		runCmd := exec.Command(dockerBinary, "run", "-m", "4MB", "busybox", "sh", "-c", `x=a; while true; do x=$x$x$x$x; done`)
 		out, exitCode, _ := runCommandWithOutput(runCmd)
 		if expected := 137; exitCode != expected {
 			errChan <- fmt.Errorf("wrong exit code for OOM container: expected %d, got %d (output: %q)", expected, exitCode, out)
@@ -3202,7 +3202,7 @@ func (s *DockerSuite) TestRunPublishPort(c *check.C) {
 // Issue #10184.
 func (s *DockerSuite) TestDevicePermissions(c *check.C) {
 	testRequires(c, NativeExecDriver)
-	const permissions = "crw-rw-rw-"
+	const permissions = "crw-------"
 	out, status := dockerCmd(c, "run", "--device", "/dev/fuse:/dev/fuse:mrw", "busybox:latest", "ls", "-l", "/dev/fuse")
 	if status != 0 {
 		c.Fatalf("expected status 0, got %d", status)

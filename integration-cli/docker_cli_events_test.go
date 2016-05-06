@@ -259,7 +259,7 @@ func (s *DockerSuite) TestEventsImagePull(c *check.C) {
 	since := daemonTime(c).Unix()
 	testRequires(c, Network)
 
-	pullCmd := exec.Command(dockerBinary, "pull", "hello-world")
+	pullCmd := exec.Command(dockerBinary, "pull", "hub.c.163.com/hzwangxing02/hello-world")
 	if out, _, err := runCommandWithOutput(pullCmd); err != nil {
 		c.Fatalf("pulling the hello-world image from has failed: %s, %v", out, err)
 	}
