@@ -50,7 +50,7 @@ deb: build
 
 
 test: build
-	$(DOCKER_RUN_DOCKER) hack/make.sh binary cross test-unit test-integration-cli test-docker-py
+	$(DOCKER_RUN_DOCKER) hack/make.sh binary cross test-unit test-integration-cli
 
 test-unit: build
 	$(DOCKER_RUN_DOCKER) hack/make.sh test-unit
