@@ -224,8 +224,8 @@ func checkMountDestination(rootfs, dest string) error {
 		"/proc/diskstats",
 		"/proc/meminfo",
 		"/proc/stat",
-        "/proc/swaps",
-        "/proc/uptime",
+		"/proc/swaps",
+		"/proc/uptime",
 	}
 	for _, valid := range validDestinations {
 		path, err := filepath.Rel(filepath.Join(rootfs, valid), dest)
